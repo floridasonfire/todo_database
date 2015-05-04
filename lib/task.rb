@@ -27,8 +27,8 @@ class Task
     DB.exec("INSERT INTO task (description, list_id, due_date) VALUES ('#{@description}', #{@list_id}, '#{@due_date}')")
   end
 
-  define_singleton_method(:clear) do
-    @@all_tasks = []
+  define_method(:clear) do
+    DB.exec("DELETE FROM task WHERE description = '#{@description}'")
   end
 
   define_method(:==) do |other_task|

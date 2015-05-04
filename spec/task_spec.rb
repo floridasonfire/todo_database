@@ -15,6 +15,13 @@ describe (Task) do
     end
   end
 
+
+    describe(".all") do
+      it("is empty at first") do
+        expect(Task.all()).to(eq([]))
+      end
+    end
+
   describe('#save') do
     it("adds a task to saved task array") do
       test_task = Task.new({:description => "Pass Code Review", :list_id => 1, :due_date => "2016-01-05"})
@@ -30,6 +37,18 @@ describe (Task) do
     it("lets you read the description out") do
       test_task = Task.new({:description => "learn SQL", :list_id => 1, :due_date => "2015-01-05"})
       expect(test_task.description()).to(eq("learn SQL"))
+    end
+  end
+
+  describe("#clear") do
+    it("clears task") do
+      test_task = Task.new({:description => "learn SQL", :list_id => 1, :due_date => "2015-01-05"})
+      test_task.save()
+      test_task2 = Task.new({:description => "Take a walk", :list_id => 2, :due_date => "2015-01-05"})
+      test_task2.save()
+      expect(Task.all()).to(eq([test_task, test_task2]))
+      test_task.clear()
+      expect(Task.all()).to(eq([test_task2]))
     end
   end
 
